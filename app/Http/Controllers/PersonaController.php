@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Persona;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class PersonaController extends Controller
@@ -15,7 +16,8 @@ class PersonaController extends Controller
      */
     public function index()
     {
-        $personas = Persona::all();
+        //$personas = Persona::where('user_id', Auth::id());
+        $personas = Auth::user()->personas;
         return view('persona/persona_index', compact('personas'));
     }
 
@@ -46,7 +48,13 @@ class PersonaController extends Controller
             'telefono' => 'max:50'
         ]);
 
-        $persona = new Persona();
+        $request->merge([
+            'user_id' => Auth::id(),
+            'apellido_materno' => $request->apellido_materno ?? ''
+        ]);
+        Persona::create($request->all());
+
+        /*$persona = new Persona();
         $persona->nombre = $request->nombre;
         $persona->apellido_paterno = $request->apellido_paterno;
         $persona->apellido_materno = $request->apellido_materno ?? '';
@@ -54,7 +62,7 @@ class PersonaController extends Controller
         $persona->correo = $request->correo ?? '';
         $persona->telefono = $request->telefono ?? '';
 
-        $persona->save();
+        $persona->save();*/
 
         return redirect()->route('persona.index');
     }
@@ -104,13 +112,15 @@ class PersonaController extends Controller
 
         ]);
 
-        $persona->nombre = $request->nombre;
+        Persona::where('id', $persona->id)->update($request->except('_token', '_method'));
+
+        /*$persona->nombre = $request->nombre;
         $persona->apellido_paterno = $request->apellido_paterno;
         $persona->apellido_materno = $request->apellido_materno ?? '';
         $persona->codigo = $request->codigo;
         $persona->telefono = $request->telefono ?? '';
         $persona->correo = $request->correo ?? '';
-        $persona->save();
+        $persona->save();*/
 
         return redirect()->route('persona.show', $persona);
     }

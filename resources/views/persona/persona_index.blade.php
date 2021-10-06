@@ -14,18 +14,20 @@
     <table border="1">
         <thead>
             <tr>
+                <th>Usuario</th>
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Apelido Paterno</th>
                 <th>Apellido Materno</th>
                 <th>Codigo</th>
                 <th>Correo</th>
-                <th>Telefono</th>
+                <th>Telefono</th>   
             </tr>
         </thead>
         <tbody>
             @foreach ($personas as $persona)
                 <tr>
+                    <td>{{ $persona->user->name }}</td>
                     <td><a href="{{ route('persona.show', $persona) }}"> {{ $persona->id }} </a></td>
                     <td>{{ $persona->nombre }}</td>
                     <td>{{ $persona->apellido_paterno }}</td>
