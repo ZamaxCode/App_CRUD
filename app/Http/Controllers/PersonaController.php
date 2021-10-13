@@ -14,10 +14,16 @@ class PersonaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
+    public function __construct()
+    {
+        $this->middleware('auth')->except("index", 'show');
+    }
+    
     public function index()
     {
-        //$personas = Persona::where('user_id', Auth::id());
-        $personas = Auth::user()->personas;
+        $personas = Persona::all();
+        //$personas = Auth::user()->personas;
         return view('persona/persona_index', compact('personas'));
     }
 
