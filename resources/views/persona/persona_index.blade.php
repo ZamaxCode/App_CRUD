@@ -14,8 +14,9 @@
     <table border="1">
         <thead>
             <tr>
+                <th>Areas</th>
+                <th>Id</th>
                 <th>Usuario</th>
-                <th>ID</th>
                 <th>Nombre</th>
                 <th>Apelido Paterno</th>
                 <th>Apellido Materno</th>
@@ -27,8 +28,15 @@
         <tbody>
             @foreach ($personas as $persona)
                 <tr>
-                    <td>{{ $persona->user->name }}</td>
+                    <td>
+                        <ol>
+                            @foreach($persona->areas as $area)
+                                <li>{{ $area->nombre_area }}</li>
+                            @endforeach
+                        </ol>
+                    </td>
                     <td><a href="{{ route('persona.show', $persona) }}"> {{ $persona->id }} </a></td>
+                    <td>{{ $persona->user->name }}</td>
                     <td>{{ $persona->nombre }}</td>
                     <td>{{ $persona->apellido_paterno }}</td>
                     <td>{{ $persona->apellido_materno }}</td>
