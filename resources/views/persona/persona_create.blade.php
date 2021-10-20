@@ -49,7 +49,7 @@
         <label for="area_id">Area:</label><br>
         <select name="area_id[]" id="area_id" multiple>
             @foreach($areas as $area)
-                <option value="{{ $area->id }}" {{ array_search($area->id, $persona->areas->pluck('id')->toArray()) === false ? '' : 'selected' }}>
+                <option value="{{ $area->id }}" {{ isset($persona) && array_search($area->id, $persona->areas->pluck('id')->toArray()) === false ? '' : 'selected' }}>
                     "{{ $area->nombre_area }}"
                 </option>
             @endforeach
