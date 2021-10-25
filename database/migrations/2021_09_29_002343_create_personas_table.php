@@ -23,6 +23,7 @@ class CreatePersonasTable extends Migration
             $table->string('telefono', 50)->default('');
             $table->string('correo')->default('');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
