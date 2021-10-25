@@ -18,6 +18,10 @@ Route::get('/', function(){
     return view('welcome');
 });
 
+Route::get('/inicio', function(){
+    return view('inicio');
+});
+
 //Route::resource('persona', PersonaController::class)->middleware('auth');
 Route::resource('persona', PersonaController::class);
 
