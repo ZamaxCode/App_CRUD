@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Persona extends Model
 {
     use HasFactory;
-    use SoftDeletes
+    use SoftDeletes;
 
     protected $fillable = [
         'nombre', 
@@ -33,7 +33,7 @@ class Persona extends Model
 
     public function getNombreCompletoAttribute()
     {
-        return $this->nombre . ' ' . $this->apellido_paterno . ' ' . $this->apellido_materno
+        return $this->nombre . ' ' . $this->apellido_paterno . ' ' . $this->apellido_materno;
     }
 
     public function setNombreAttribute($nombre)
